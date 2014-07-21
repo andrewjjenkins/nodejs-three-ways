@@ -51,7 +51,7 @@ function lockCallback(data) {
 
 function sendMessage(payload) {
   console.log("Sending email notification...");
-  var smtpTransport = mailer.createTransport("SMTP",
+  var smtpTransport = mailer.createTransport(
     {
       service: "Gmail",
       auth: { user: config.googleApiUser, pass: config.googleApiKey },
