@@ -29,3 +29,6 @@ node_modules
 
 # OS X Hidden Files
 .DS_Store
+
+# Vim swap
+.*.swp
