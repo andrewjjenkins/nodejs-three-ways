@@ -1,7 +1,7 @@
 {
   "name": "node-act1",
   "version": "0.0.0",
-  "description": "",
+  "description": "My implementation of OSCON node.js tutorial from https://github.com/cacois/nodejs-three-ways",
   "main": "worker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "nodemailer": "^1.0.3",
     "redis": "^0.11.0"
-  }
+  },
+  "engine": {
+    "node": ">=0.10.0"
+  },
+  "repository": "https://github.com/andrewjjenkins/nodejs-three-ways"
 }
