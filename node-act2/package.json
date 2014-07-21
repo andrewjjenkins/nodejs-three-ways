@@ -1,0 +1,9 @@
+{
+  "name": "Express-Basic-Tutorial",
+  "description": "I'm learning nodejs express!",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express" : "4.4.0"
+  }
+}
