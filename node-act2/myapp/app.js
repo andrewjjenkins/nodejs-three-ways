@@ -12,6 +12,18 @@ var visits = require('./routes/visits');
 var Visit = require('./models/visit.js');
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(3001);
+
+var chat = io.of('/chat').on('connection', function (socket) {
+  socket.on('chat', function (data) {
+    data.color = 'green';
+    socket.emit('chat', data);
+    data.color = 'red';
+    socket.broadcast.emit('chat', data);
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
