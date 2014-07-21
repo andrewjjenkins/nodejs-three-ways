@@ -7,6 +7,9 @@
   <body>
     <h1>Hi, <%= my_name %></h1>
     <h1>The date is <%= date %></h1>
-    <em>we'll fill this in a minute..</em>
+    <h2>Look who's visiting</h2>
+    <% for (var v in visits) { %>
+    <p>(<%- visits[v].date %>) : <%- visits[v].user_agent %></p>
+    <% } %>
   </body>
 </html>

@@ -4,10 +4,12 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var visits = require('./routes/visits');
+var Visit = require('./models/visit.js');
 
 var app = express();
 
@@ -21,6 +23,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+  new Visit({user_agent: req.headers['user-agent']}).save();
+  console.log('Pulled user agent %s out of client request for %s',
+              req.headers['user-agent'], req.url);
+  next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
@@ -59,3 +67,5 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+mongoose.connect('mongodb://localhost/myapp');
