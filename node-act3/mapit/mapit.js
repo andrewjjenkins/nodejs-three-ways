@@ -18,6 +18,32 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
+
+  Template.map.rendered = function () {
+    L.Icon.Default.imagePath = 'packages/leaflet/images';
+
+    window.map = L.map('map', {
+      doubleClickZoom: false,
+      zoomControl: false
+    }).setView([45.52854352208366,-122.66302943229674], 13);
+
+    window.map.on('dblclick', function(event, object) {
+        // We're storing the marker coordinates in an extensibel JSON
+        // data structure, to leave room to add more info later
+        console.log("inserting marker: " + [ event.latlng.lat, event.latlng.lng ]);
+        Markers.insert({"coords": [event.latlng.lat,event.latlng.lng]});
+    });
+
+    L.tileLayer.provider('Thunderforest.Outdoors').addTo(map);
+
+    var markers = Markers.find();
+
+    markers.observe({
+      added: function(marker) {
+        L.marker(marker.coords).addTo(map);
+      }
+    });
+  };
 }
 
 if (Meteor.isServer) {
